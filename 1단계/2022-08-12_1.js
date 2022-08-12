@@ -24,6 +24,15 @@ function solution(phone_number) {
 
 solution("01033334444");
 
+function solution(phone_number) {
+  let answer = "";
+  let slice_number = phone_number.slice(-4);
+  let star = "*".repeat(phone_number.length - 4);
+  answer = star + slice_number;
+
+  return answer;
+}
+
 // 다른사람 풀이
 
 function hide_numbers(s) {
