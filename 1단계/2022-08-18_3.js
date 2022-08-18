@@ -29,8 +29,6 @@ function solution(n) {
 }
 
 // 다른 사람 풀이
-// 배열로 푸는 것보다, 처음부터 숫자로 푸는것이 빠르다
-
 function solution(n) {
   const newN = String(n);
   const newArr = newN.split("").sort().reverse().join("");
