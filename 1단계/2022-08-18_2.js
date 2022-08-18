@@ -26,3 +26,14 @@ function solution(n) {
   }
   return answer;
 }
+
+// 전에 풀었던 풀이
+function solution(n) {
+  var answer = 0;
+  sqrt = Math.sqrt(n);
+  if (sqrt % 1 === 0) {
+    return Math.pow(sqrt + 1, 2);
+  } else {
+    return -1;
+  }
+}
