@@ -53,6 +53,8 @@ function solution(s, n) {
 }
 
 // 다른사람 풀이
+// 문자열 -> 아스키코드 : s.charCodeAt()
+// 아스키코드 -> 문자열 : String.fromCharCode()
 function solution(s, n) {
   return s
     .split("")
