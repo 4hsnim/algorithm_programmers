@@ -19,7 +19,7 @@
 // 입출력 예 #2
 // 1부터 5 사이의 소수는 [2,3,5] 3개가 존재하므로 3를 반환
 
-// 테스트는 통과했지만 시간이 엄청오래걸림... 시간초과로 실패함
+// 정확성은  통과했지만 시간이 엄청오래걸림... 시간초과로 실패함
 function solution(n) {
   var answer = 0;
   for (let i = 1; i <= n; i++) {
@@ -41,8 +41,11 @@ function solution(n) {
 }
 
 // 다른사람 풀이
+// 에라토스테네스의 채로 소수찾기
 function solution(n) {
   let answer = 0;
+  // Array(숫자).fill(어떤 값)은 Array에 숫자만큼 어떤 값을 각 넣으라는 의미이다.
+  // ex) Array(4).fill("a") = ["a","a","a","a"] 
   const arr = new Array(n + 1).fill(true);
 
   for (let i = 2; i <= n; ++i) {
@@ -63,3 +66,41 @@ function solution(n) {
   }
   return answer;
 }
+
+// 풀이 보고 다시 나혼자 푼 풀이
+// 효율성 테스트를 통과했지만 속도가 꽤나 느림
+// 반복문에서 continue or break를 활용하면 효율성을 높일 수 있음.
+function solution(n) {
+  var answer = 0;
+  const arr = new Array(n+1).fill(true)
+  for (let i = 2; i <= n; i++) {
+      for (let k = i * 2; k <= n; k += i) {
+          arr[k] = false
+      }
+      
+      if (arr[i] === true) {
+          answer ++
+      }
+  }
+  return answer;
+}
+
+// continue 추가
+// continue를 for문 가장 앞에 써야 효율성을 높일 수 있음
+// continue를 뒤에 쓰니까 효율성이 많이 낮아지더라..!
+function solution(n) {
+  var answer = 0
+  const arr = new Array(n+1).fill(true)
+  for (let i = 2; i <= n; i++) {
+      if(arr[i] === false)
+          continue
+      for(let k = i * 2; k <= n; k += i) {
+          arr[k] = false
+      }
+      if (arr[i] === true) {
+          answer ++
+      }
+  }
+  return answer
+}
+
