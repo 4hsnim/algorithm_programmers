@@ -44,6 +44,8 @@
 
 // 풀이실패
 // 구글링해서 찾은 답
+// Math.pow(숫자,거듭제곱할 숫자)
+// ex) Math.pow(2,3) = 2의 3승인 8
 function solution(dartResult) {
     var num = 0;
     var answer = [];
@@ -84,3 +86,101 @@ function solution(dartResult) {
     }
     return num;
 }
+
+// 다른사람이 푼 정규식풀이
+function solution(dartResult) {
+    const bonus = { 'S': 1, 'D': 2, 'T': 3 },
+          options = { '*': 2, '#': -1, undefined: 1 };
+
+    let darts = dartResult.match(/\d.?\D/g);
+
+    for (let i = 0; i < darts.length; i++) {
+        let split = darts[i].match(/(^\d{1,})(S|D|T)(\*|#)?/),
+            score = Math.pow(split[1], bonus[split[2]]) * options[split[3]];
+
+        if (split[3] === '*' && darts[i - 1]) darts[i - 1] *= options['*'];
+
+        darts[i] = score;
+    }
+
+    return darts.reduce((a, b) => a + b);
+}
+
+
+// 해설 보고, 다시 나혼자 푼 풀이
+function solution(dartResult) {
+    var answer = []
+    let result = 0
+    let temp = 0
+    for (let i = 0; i < dartResult.length; i++) {
+        if (dartResult[i] >= 0 && dartResult[i] <= 9) {
+            if (dartResult[i] == 1 && dartResult[i+1] == 0) {
+                temp = 10
+                i++
+            } else {
+                temp = dartResult[i]
+            }
+        }
+        else if (dartResult[i] === "S") {
+            answer.push(Math.pow(temp,1))
+        }
+        else if (dartResult[i] === "D") {
+            answer.push(Math.pow(temp,2))
+        }
+        else if (dartResult[i] === "T") {
+            answer.push(Math.pow(temp,3))
+        }
+        if (dartResult[i] === "*") {
+            answer[answer.length -1] *= 2
+            answer[answer.length -2] *= 2
+        }
+        if (dartResult[i] === "#") {
+            answer[answer.length -1] *= -1
+        }
+    }
+    for (let j = 0; j < answer.length; j++) {
+        result += answer[j]
+    }
+    
+    return result;
+}
+
+// 다시 반복해서 풀어봄
+// 마지막 result값을 map으로 바꿔봄
+function solution (dartResult) {
+    let answer = []
+    let result = 0
+    let temp = 0
+    for (let i = 0; i < dartResult.length; i++) {
+        if (dartResult[i] >= 0 && dartResult[i] <= 9) {
+            if (dartResult[i] == 1 && dartResult[i+1] == 0) {
+                temp = 10
+                i++
+            } else {
+                temp = dartResult[i]
+            }
+        }
+        if (dartResult[i] === "S") {
+            answer.push(Math.pow(temp,1))
+        }
+        if (dartResult[i] === "D") {
+            answer.push(Math.pow(temp,2))
+        }
+        if (dartResult[i] === "T") {
+            answer.push(Math.pow(temp,3))
+        }
+        if (dartResult[i] === "*") {
+            answer[answer.length -1] *= 2
+            answer[answer.length -2] *= 2
+        }
+        if (dartResult[i] === "#") {
+            answer[answer.length -1] *= -1
+        }
+    }
+    // for문으로 전체 배열의 값을 각각 더한 걸 map함수 이용
+    answer.map((value) => {
+        result += value
+    })
+    return result
+}
+
