@@ -72,3 +72,18 @@ function solution(n, arr1, arr2) {
     }
     return answer;
 }
+
+// if문을 썼던 걸 삼항연산자로 바꿔보았다.
+function solution(n, arr1, arr2) {
+    var answer = []
+    let binArr1 = arr1.map((value) => value.toString(2).padStart(n,0))
+    let binArr2 = arr2.map((value) => value.toString(2).padStart(n,0))
+    for (let i = 0; i < n; i++) {
+        let temp = []
+        for (let j = 0; j < n; j++) {           
+            binArr1[i][j] == 1 || binArr2[i][j] == 1 ? temp.push("#") : temp.push(" ") 
+        }
+        answer.push(temp.join(""))
+    }
+    return answer;
+}
