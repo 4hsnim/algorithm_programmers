@@ -40,15 +40,17 @@
 function solution (numbers) {
     var result = []
     let allPlusArr = []
+    // 일단 모든 값을 다 더해보고 나중에 중복된 값을 제거하자
     for (let i = 0; i < numbers.length; i++) {
         for(let j = 0; j < numbers.length; j++) {
-            // 중복으로 더해지는 걸 continue로 방지하였다.
+            // 중복된 index로 더해지는 걸 continue로 방지하였다.
             if(i === j) {
                 continue
             }
             allPlusArr.push(numbers[i]+numbers[j])
         }
     }
+    // set 생성자는 중복된 값을 제거해주고 객체로 반환시켜준다.
     let set = new Set(allPlusArr)
     result = [...set].sort((a,b) => a-b)
     
